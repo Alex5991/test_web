@@ -44,9 +44,11 @@ jobs:
 
       - name: Push changes into games repository
         run: |
-          cd ${{ github.workspace }}/games # Move in games repo
+          cd ${{ github.workspace }}/games # Switch to games folder (repository: Alex5991/games)
+          # Set up git
           git config user.name github-actions
           git config user.email github-actions@github.com
+          # .git must be deleted from current repository
           rm -rf ${{ github.event.repository.name }}/.git*
           git add .
           git commit -m "Automatic assembly project = ${{ github.event.repository.name }} sha = ${{ github.sha }}"
