@@ -57,7 +57,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git rm --cached .git*
+          git rm --cached /*/.git*
           git commit -m "Automatic publish from github.com/project project = ${{ github.event.repository.name }} sha = ${{ github.sha }}"
           git push
           
