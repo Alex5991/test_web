@@ -20,9 +20,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
-      # Каждый таск начинается в пути github.workspace
-      - name: Run a one-line script
-        run: pwd
+      # # Each task (step) starts in the path github.workspace (pwd)
+      # - name: Run a one-line script 
+      #   run: pwd # Runs a single command using the runners shell
         
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
@@ -32,28 +32,24 @@ jobs:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN_PAT }} # `GH_PAT` is a secret that contains your PAT
           path: games
 
-      - name: Run a one-line script
-        run: pwd
-
-      - name: qweqweqwe
+      - name: Remove old project from games project
         run: |
           cd ${{ github.workspace }}/games # Move in games repo
-          # rm -rf ${{ github.event.repository.name }} # Remove old this project from games repo
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: pwd
-
-      - name: List files in the repository
-        run: |
-          ls -la
+          rm -rf ${{ github.event.repository.name }} # Remove old this project from games repo
 
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
-          path: games/{{ github.event.repository.name }}
+          path: games/${{ github.event.repository.name }}
 
       - name: List files in the repository 2
         run: |
           ls -la
           ls -la games
+
+      - name: Push changes into games repository
+        run: |
+          git add .
+          git commit -m "Automatic publish from github.com/project"
+          git push
+          
