@@ -56,7 +56,7 @@ jobs:
           cd ${{ github.workspace }}/games # Move in games repo
           git config user.name github-actions
           git config user.email github-actions@github.com
-          find ./*/ -name ".git" -type d -delete
+          rm -rf ${{ github.event.repository.name }}/.git
           git add .
           git commit -m "Automatic publish from github.com/project project = ${{ github.event.repository.name }} sha = ${{ github.sha }}"
           git push
