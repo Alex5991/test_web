@@ -25,6 +25,7 @@ jobs:
         with:
           ref: main # Сhange to main branch
           repository: Alex5991/games
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN_PAT }} # `GH_PAT` is a secret that contains your PAT
 
       - name: List files in the repository
         run: |
