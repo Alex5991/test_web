@@ -19,7 +19,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    
+
+
+      - name: Run a one-line script
+        run: pwd
+        
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
         with:
@@ -46,6 +50,9 @@ jobs:
       - name: List files in the repository 2
         run: |
           ls
+
+      - name: Run a one-line script
+        run: pwd
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
