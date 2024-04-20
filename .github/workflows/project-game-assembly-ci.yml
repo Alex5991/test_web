@@ -49,6 +49,7 @@ jobs:
 
       - name: Push changes into games repository
         run: |
+          cd ${{ github.workspace }}/games # Move in games repo
           git add .
           git commit -m "Automatic publish from github.com/project"
           git push
