@@ -20,7 +20,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
-
+      # Каждый таск начинается в пути github.workspace
       - name: Run a one-line script
         run: pwd
         
@@ -30,10 +30,11 @@ jobs:
           ref: main # Сhange to main branch
           repository: Alex5991/games
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN_PAT }} # `GH_PAT` is a secret that contains your PAT
+          path: games
 
-      - name: qweqwe wqeqwe
+      - name: qweqweqwe
         run: |
-          cd ${{ github.workspace }} # Move in games repo
+          cd ${{ github.workspace }}/games # Move in games repo
           rm -rf ${{ github.event.repository.name }} # Remove old this project from games repo
 
       # Runs a single command using the runners shell
