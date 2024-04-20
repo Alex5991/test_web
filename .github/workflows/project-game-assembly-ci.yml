@@ -32,6 +32,9 @@ jobs:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN_PAT }} # `GH_PAT` is a secret that contains your PAT
           path: games
 
+      - name: Run a one-line script
+        run: pwd
+
       - name: qweqweqwe
         run: |
           cd ${{ github.workspace }}/games # Move in games repo
