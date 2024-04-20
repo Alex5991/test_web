@@ -46,6 +46,7 @@ jobs:
         run: |
           ls -la
           ls -la games
+          ls -la games/${{ github.event.repository.name }}
 
       - name: Push changes into games repository
         run: |
@@ -53,6 +54,6 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add .
-          git commit -m "Automatic publish from github.com/project project = {{ github.event.repository.name }} sha = ${{ github.sha }}"
+          git commit -m "Automatic publish from github.com/project project = ${{ github.event.repository.name }} sha = ${{ github.sha }}"
           git push
           
