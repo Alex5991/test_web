@@ -10,9 +10,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "Game-Assembled-by-GitHub-Actions"
@@ -23,33 +20,27 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
-      # # Each task (step) starts in the path github.workspace (pwd)
+      # # Each task (step) starts in the base path - github.workspace (pwd)
       # - name: Run a one-line script 
       #   run: pwd # Runs a single command using the runners shell
         
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Clone repo and change branch. Checks-out repository under $GITHUB_WORKSPACE. 
       - uses: actions/checkout@v4
         with:
           ref: main # Сhange to main branch
-          repository: Alex5991/games
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN_PAT }} # `GH_PAT` is a secret that contains your PAT
-          path: games
+          repository: Alex5991/games # Copy repo
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN_PAT }} # Secret that contains PAT
+          path: games # Downloaded to relative path
 
       - name: Remove old project from games project
         run: |
-          cd ${{ github.workspace }}/games # Move in games repo
+          cd ${{ github.workspace }}/games # Switch to games folder (repository: Alex5991/games)
           rm -rf ${{ github.event.repository.name }} # Remove old this project from games repo
 
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
           path: games/${{ github.event.repository.name }}
-
-      - name: List files in the repository 2
-        run: |
-          ls -la
-          ls -la games
-          ls -la games/${{ github.event.repository.name }}
 
       - name: Push changes into games repository
         run: |
@@ -58,6 +49,6 @@ jobs:
           git config user.email github-actions@github.com
           rm -rf ${{ github.event.repository.name }}/.git*
           git add .
-          git commit -m "Automatic publish from github.com/project project = ${{ github.event.repository.name }} sha = ${{ github.sha }}"
+          git commit -m "Automatic assembly project = ${{ github.event.repository.name }} sha = ${{ github.sha }}"
           git push
           
