@@ -29,7 +29,7 @@ jobs:
         with:
           ref: main # Сhange to main branch
           repository: Alex5991/games # Copy repo
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN_PAT }} # Secret that contains PAT
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN_PAT }} # Secret that contains PAT
           path: games # Downloaded to relative path
 
       - name: Remove old project from games project
