@@ -1,4 +1,4 @@
-# Custom continuous integration (CI)
+# Custom continuous integration (CI). Frequent code committing with inspections, debugging and merging to reduce defects, conflicts and improve code quality
 name: ProjectGameAssemblyCI
 
 # Controls when the workflow will run
